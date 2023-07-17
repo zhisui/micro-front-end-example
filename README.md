@@ -351,9 +351,9 @@ export default defineConfig({
 ## 引入 vue-cli + Vue2 子应用
 
 为了能正常加载子应用的静态资源，需要添加public-path.js文件，并在main.js文件中引入
-***
-在Vit构建的子项目中不用加入public-path.js文件，vite-plugin-qiankun插件已经处理好了
 
+***
+webpack中支持运行时publicPath,也就是__webpack_public_path__，而vite不支持运行时publicPath，vite-plugin-qiankun插件处理此问题，故在Vite项目中无需加入。
 ***
 
 ```js
