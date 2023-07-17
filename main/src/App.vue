@@ -1,15 +1,15 @@
 <template>
     <div class="container">
         <div class="nav">
-            <RouterLink :to="item.path" v-for="(item, index) in navList" :key="index" active-class="is-active">{{ item.name
+            <RouterLink :to="item.path" v-for="(item, index) in navList" :key="index">{{ item.name
             }}</RouterLink>
         </div>
         <!-- 主应用渲染区，用于挂载主应用路由触发的组件 -->
-        <div class="content" v-show="routeName">
+        <div class="content" v-if="routeName">
             <RouterView />
         </div>
         <!-- 子应用渲染区，用于挂载子应用节点 -->
-        <div class="content" id="frame" v-show="!routeName">
+        <div class="content" id="frame" v-if="!routeName">
             <RouterView />
         </div>
     </div>
@@ -34,6 +34,10 @@ const navList = ref([
         name: '子应用react',
         path: '/react'
     },
+    {
+        name: '子应用Vue2',
+        path: '/vue2'
+    },
 ])
 
 const routeName = computed(() => {
@@ -47,19 +51,30 @@ onMounted(() => {
             name: 'VueMicroApp',
             entry: 'http://localhost:5000',
             container: '#frame',
-            activeRule: '/vue'
+            activeRule: '/vue',
+            props: {
+                id: 'props 传值方式'
+            },
+
         },
         {
             name: 'ReactMicroApp',
             entry: 'http://localhost:5001/',
             container: '#frame',
             activeRule: '/react'
+        },
+        {
+            name: 'Vue2MicroApp',
+            entry: 'http://localhost:5002/',
+            container: '#frame',
+            activeRule: '/vue2'
         }
     ])
     start({
         prefetch: 'all', // 预加载
         sandbox: {
-            experimentalStyleIsolation: true, //   开启沙箱模式,实验性方案
+            experimentalStyleIsolation: true, //   开启沙箱模式,实验性方案,
+            // strictStyleIsolation: true
         },
     })
 })

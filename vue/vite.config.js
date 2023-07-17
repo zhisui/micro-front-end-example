@@ -22,6 +22,7 @@ export default defineConfig({
             'Access-Control-Allow-Origin': '*',
         },
     },
+
     // output: {
     //     // 微应用的包名，这里与主应用中注册的微应用名称一致
     //     library: 'VueMicroApp',

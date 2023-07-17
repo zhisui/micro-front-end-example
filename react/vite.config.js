@@ -20,6 +20,7 @@ export default defineConfig({
         headers: {
             'Access-Control-Allow-Origin': '*',
         },
+        hmr: false
     },
     resolve: {
         alias: {

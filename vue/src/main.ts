@@ -7,25 +7,24 @@ import {
 import { createApp } from 'vue'
 import App from './App.vue'
 import { routes } from './routes'
-import './public-path'
 
-let instance = null
-let router = null
+let instance
+let router
 
 /**
  * 渲染函数
  * 两种情况：主应用生命周期钩子中运行 / 微应用单独启动时运行
  */
 const render = () => {
-  // 在 render 中创建 VueRouter，可以保证在卸载微应用时，移除 location 事件监听5，防止事件污染
+  // 在 render 中创建 VueRouter，可以保证在卸载微应用时，移除 location 事件监听，防止事件污染
    router = createRouter({
     // 运行在主应用中时，添加路由命名空间 /vue
-    // base: window.__POWERED_BY_QIANKUN__ ? '/vue' : '/',
-    history: createWebHistory(window.__POWERED_BY_QIANKUN__ ? '/vue' : '/'),
+    history: createWebHistory(qiankunWindow.__POWERED_BY_QIANKUN__ ? '/vue' : '/'),
     routes,
   })
   // 挂载应用
-  instance = createApp(App).use(router)
+  instance = createApp(App)
+  instance.use(router)
   instance.mount('#app-vue')
 }
 
@@ -38,12 +37,13 @@ const initQianKun = () => {
     },
     // 应用每次进入都会调用 mount 方法，通常我们在这里触发应用的渲染方法，也可以接受主应用传来的参数
     mount(_props) {
-      console.log('mount', _props)
+      console.log('mount', _props.id)
       render()
     },
     // 应用每次 切出/卸载 会调用的unmount方法，通常在这里我们会卸载微应用的应用实例
     unmount(_props) {
       console.log('unmount', _props)
+      instance.unmount()
       instance = null
       router = null
     },
