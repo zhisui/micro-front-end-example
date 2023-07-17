@@ -22,8 +22,8 @@ module.exports = {
       library: "Vue2MicroApp",
       // 将你的 library 暴露为所有的模块定义下都可运行的方式
       libraryTarget: 'umd',
-      // 按需加载相关，设置为 webpackJsonp_VueMicroApp 即可
-      jsonpFunction: `webpackJsonp_VueMicroApp`,
+      // 按需加载相关，设置为 webpackJsonp_Vue2MicroApp 即可
+      jsonpFunction: `webpackJsonp_Vue2MicroApp`,
     }
   }
 }

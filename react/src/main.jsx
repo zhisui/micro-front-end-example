@@ -4,7 +4,6 @@ import App from './App.jsx'
 import './index.css'
 import { renderWithQiankun, qiankunWindow } from 'vite-plugin-qiankun/dist/helper'
 import { BrowserRouter } from 'react-router-dom'
-import './public-path'
 
 let root
 const render = () => {
